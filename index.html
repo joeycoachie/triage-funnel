@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sovereign Health | Protocol Triage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #fafafa; }
+        .fade-in { animation: fadeIn 0.4s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="text-gray-800 antialiased min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="w-full bg-white border-b border-gray-200 py-4 px-6 flex justify-between items-center sticky top-0 z-10">
+        <div class="font-bold tracking-tighter text-xl text-black">M.O.E. <span class="text-gray-400 font-light">GROUP</span></div>
+        <div class="text-xs uppercase tracking-widest text-gray-400">Diagnostic System v1.1</div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-grow flex flex-col items-center justify-center p-6 max-w-3xl mx-auto w-full">
+        
+        <!-- Step 1: Problem Selection -->
+        <div id="step-1" class="w-full fade-in">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2 text-center">Identify Your Biological Bottleneck.</h1>
+            <p class="text-gray-500 text-center mb-10 max-w-lg mx-auto">Select the primary friction point preventing you from operating at peak capacity.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <button onclick="selectProblem('energy')" class="group text-left p-6 bg-white border border-gray-200 rounded-xl hover:border-black hover:shadow-lg transition-all duration-200">
+                    <div class="text-2xl mb-3 group-hover:scale-110 transition-transform origin-left">🔋</div>
+                    <h3 class="font-semibold text-lg mb-1">Energy Leak & Fatigue</h3>
+                    <p class="text-sm text-gray-500">I crash in the afternoon. My engine runs out of fuel too fast.</p>
+                </button>
+                
+                <button onclick="selectProblem('aging')" class="group text-left p-6 bg-white border border-gray-200 rounded-xl hover:border-black hover:shadow-lg transition-all duration-200">
+                    <div class="text-2xl mb-3 group-hover:scale-110 transition-transform origin-left">🧬</div>
+                    <h3 class="font-semibold text-lg mb-1">Cellular Aging & Stress</h3>
+                    <p class="text-sm text-gray-500">High stress, poor sleep, and concern over vascular/heart health.</p>
+                </button>
+
+                <button onclick="selectProblem('fertility')" class="group text-left p-6 bg-white border border-gray-200 rounded-xl hover:border-black hover:shadow-lg transition-all duration-200">
+                    <div class="text-2xl mb-3 group-hover:scale-110 transition-transform origin-left">🌱</div>
+                    <h3 class="font-semibold text-lg mb-1">Fertility & Pre-Natal Prep</h3>
+                    <p class="text-sm text-gray-500">Preparing the body's ecosystem for pregnancy. Need maximum nutrient density.</p>
+                </button>
+
+                <button onclick="selectProblem('biomechanics')" class="group text-left p-6 bg-white border border-gray-200 rounded-xl hover:border-black hover:shadow-lg transition-all duration-200">
+                    <div class="text-2xl mb-3 group-hover:scale-110 transition-transform origin-left">⚙️</div>
+                    <h3 class="font-semibold text-lg mb-1">Joints & Biomechanics</h3>
+                    <p class="text-sm text-gray-500">Training hard but joints are aching. Recovery is too slow.</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 2: Protocol Recommendation (Hidden initially) -->
+        <div id="step-2" class="w-full hidden">
+            <button onclick="goBack()" class="text-sm text-gray-400 hover:text-black mb-6 flex items-center transition-colors">
+                ← Back to Selection
+            </button>
+            
+            <div class="bg-white border border-gray-200 rounded-2xl p-8 shadow-sm">
+                <div class="inline-block bg-black text-white text-xs font-bold uppercase tracking-widest py-1 px-3 rounded-full mb-4">Recommended Protocol</div>
+                
+                <h2 id="protocol-title" class="text-3xl font-bold mb-2">The Protocol</h2>
+                <p id="protocol-desc" class="text-gray-600 mb-8 pb-6 border-b border-gray-100">Description goes here.</p>
+
+                <div class="space-y-6 mb-8">
+                    <!-- Core Fuel -->
+                    <div class="flex gap-4">
+                        <div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center text-xl shrink-0">🥤</div>
+                        <div>
+                            <h4 class="font-semibold">1. Base Fuel: The Nutrient Smoothie (F1)</h4>
+                            <p class="text-sm text-gray-500">3,000 nutrients compressed into 200 calories. Eliminates decision fatigue and fuels the chassis instantly.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Dynamic Add-on based on selection -->
+                    <div class="flex gap-4" id="dynamic-addon">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 p-6 rounded-xl border border-gray-100 mb-8">
+                    <h4 class="font-semibold mb-2">The Action Plan</h4>
+                    <p class="text-sm text-gray-600 mb-4">We don't just sell components; we install an operating system. Tap below to send your diagnostic result directly to your Strategist.</p>
+                    <a id="whatsapp-btn" href="#" target="_blank" class="block w-full text-center bg-black text-white font-semibold py-3 rounded-lg hover:bg-gray-800 transition-colors">
+                        Send Diagnostic to Strategist
+                    </a>
+                </div>
+
+                <div class="text-center">
+                    <p class="text-[10px] text-gray-400 uppercase tracking-wide">
+                        *Powered by the world's #1 nutrition protocol framework. We partner with elite global suppliers (including Herbalife) to source our fuel.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // CONFIGURATION: Replace this with your actual WhatsApp number (including country code, no '+')
+        const STRATEGIST_WHATSAPP_NUMBER = "60123456789"; 
+
+        const protocols = {
+            'energy': {
+                title: 'The Metabolic Reset Stack',
+                desc: 'Your engine is running on contaminated fuel. This protocol is designed to eliminate afternoon crashes and provide sustained, clean cognitive and physical energy.',
+                addonIcon: '🍵',
+                addonTitle: '2. The Metabolic Accelerator (Tea)',
+                addonDesc: 'Provides a clean energy lift and thermogenic support without the crash associated with high-sugar energy drinks.',
+                waMessage: 'Hi! I just completed the M.O.E. Diagnostic. My bottleneck is "Energy Leak & Fatigue". I am interested in the Metabolic Reset Stack.'
+            },
+            'aging': {
+                title: 'The Vascular Sovereignty Stack',
+                desc: 'Targeting the silent deterioration of your cells. This protocol ensures your blood vessels remain elastic, maximizing nutrient delivery and overnight recovery.',
+                addonIcon: '🧬',
+                addonTitle: '2. The Nobel Stack (Niteworks)',
+                addonDesc: 'The Nobel Prize-winning Nitric Oxide protocol. Relaxes blood vessels while you sleep, turning your vascular system into a 6-lane superhighway.',
+                waMessage: 'Hi! I just completed the M.O.E. Diagnostic. My bottleneck is "Cellular Aging & Stress". I am interested in the Vascular Sovereignty Stack (Niteworks).'
+            },
+            'fertility': {
+                title: 'The Ecosystem Prep Protocol',
+                desc: 'When preparing for pregnancy, your body is an ecosystem. This stack floods your cells with maximum nutrient density to create the optimal environment for creation.',
+                addonIcon: '🌿',
+                addonTitle: '2. The Gut Compliance Matrix (Aloe)',
+                addonDesc: 'Soothes the digestive system, drastically improving your body\'s ability to absorb the high-quality nutrients required for fertility prep.',
+                waMessage: 'Hi! I just completed the M.O.E. Diagnostic. My bottleneck is "Fertility & Pre-Natal Prep". I am interested in the Ecosystem Prep Protocol.'
+            },
+            'biomechanics': {
+                title: 'The Chassis Repair Stack',
+                desc: 'You are pushing your hardware hard. This protocol patches the micro-tears in your joints and connective tissues so you can sustain high-level training.',
+                addonIcon: '🧱',
+                addonTitle: '2. The Structural Glue (Collagen Stack)',
+                addonDesc: 'The waterproof cement that patches the microscopic holes in your joints and tissues, allowing your hardware to recover instantly.',
+                waMessage: 'Hi! I just completed the M.O.E. Diagnostic. My bottleneck is "Joints & Biomechanics". I am interested in the Chassis Repair Stack.'
+            }
+        };
+
+        function selectProblem(type) {
+            const data = protocols[type];
+            
+            // Populate data
+            document.getElementById('protocol-title').innerText = data.title;
+            document.getElementById('protocol-desc').innerText = data.desc;
+            
+            document.getElementById('dynamic-addon').innerHTML = `
+                <div class="w-12 h-12 rounded-lg bg-gray-100 flex items-center justify-center text-xl shrink-0">${data.addonIcon}</div>
+                <div>
+                    <h4 class="font-semibold">${data.addonTitle}</h4>
+                    <p class="text-sm text-gray-500">${data.addonDesc}</p>
+                </div>
+            `;
+
+            // Setup WhatsApp Link
+            const encodedMessage = encodeURIComponent(data.waMessage);
+            const waUrl = `https://wa.me/${STRATEGIST_WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            document.getElementById('whatsapp-btn').setAttribute('href', waUrl);
+
+            // Transition
+            document.getElementById('step-1').classList.add('hidden');
+            document.getElementById('step-1').classList.remove('fade-in');
+            
+            const step2 = document.getElementById('step-2');
+            step2.classList.remove('hidden');
+            step2.classList.add('fade-in');
+        }
+
+        function goBack() {
+            document.getElementById('step-2').classList.add('hidden');
+            document.getElementById('step-2').classList.remove('fade-in');
+            
+            const step1 = document.getElementById('step-1');
+            step1.classList.remove('hidden');
+            step1.classList.add('fade-in');
+        }
+    </script>
+</body>
+</html>
